@@ -10,6 +10,7 @@ var request = require('request');
 var compress = require('compression');
 
 var config = require('./config');
+var config = require('./config');
 
 var User = mongoose.model('User', new mongoose.Schema({
   instagramId: { type: String, index: true },
