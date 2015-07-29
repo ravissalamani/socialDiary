@@ -1,9 +1,12 @@
 angular.module('Instagram')
-  .controller('HomeCtrl', function($scope, $window, $rootScope, $auth, API) {
-
+  .controller('HomeCtrl', function($scope, $window, $rootScope, $auth, API,ngProgressFactory) {
+	  $scope.progressbar = ngProgressFactory.createInstance();
+	  
     if ($auth.isAuthenticated() && ($rootScope.currentUser && $rootScope.currentUser.username)) {
+    	$scope.progressbar.start();
       API.getFeed().success(function(data) {
         $scope.photos = data;
+        $scope.progressbar.complete();
       });
     }
 

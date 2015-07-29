@@ -44,6 +44,7 @@ console.log("conn_str : "+conn_str);
 
 
 mongoose.connect(conn_str);
+mongoose.set('debug', true);
 mongoose.connection.on('error', function(err) {
   console.log('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
 });
@@ -268,7 +269,7 @@ app.post('/auth/instagram', function(req, res) {
 app.get('/api/feed', isAuthenticated, function(req, res) {
   var feedUrl = 'https://api.instagram.com/v1/users/self/feed';
   var params = { access_token: req.user.accessToken };
-
+  console.log('/api/feed ='+feedUrl+"   params ="+params);
   request.get({ url: feedUrl, qs: params, json: true }, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       res.send(body.data);
@@ -279,7 +280,7 @@ app.get('/api/feed', isAuthenticated, function(req, res) {
 app.get('/api/media/:id', isAuthenticated, function(req, res) {
   var mediaUrl = 'https://api.instagram.com/v1/media/' + req.params.id;
   var params = { access_token: req.user.accessToken };
-
+  console.log('/api/media/:id ='+mediaUrl+"  params="+params);
   request.get({ url: mediaUrl, qs: params, json: true }, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       res.send(body.data);
@@ -291,7 +292,7 @@ app.post('/api/like', isAuthenticated, function(req, res) {
   var mediaId = req.body.mediaId;
   var accessToken = { access_token: req.user.accessToken };
   var likeUrl = 'https://api.instagram.com/v1/media/' + mediaId + '/likes';
-
+  console.log('/api/like ='+likeUrl+"  token="+accessToken);
   request.post({ url: likeUrl, form: accessToken, json: true }, function(error, response, body) {
     if (response.statusCode !== 200) {
       return res.status(response.statusCode).send({

@@ -23,8 +23,18 @@
       <div class="row">
 
         <div class="col-xs-12">
-          <h5><i class="ion-heart text-danger"></i> {{photo.likes.count}} likes</h5>
-
+          <h5><i class="ion-heart text-danger"></i> {{photo.likes.count}} likes
+              <span ng-if="photo.likes.count<3">
+          [
+          		<span ng-repeat="likedUser in photo.likes.data">
+          				{{likedUser.username+" "}}
+          		</span>
+          ]
+          </span>
+          
+          
+          </h5>
+      
           <hr class="soften">
           <h5 class="text-center"><i class="ion-chatbox-working text-primary"></i> Comments</h5>
 
