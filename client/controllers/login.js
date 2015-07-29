@@ -2,13 +2,16 @@ angular.module('Instagram')
   .controller('LoginCtrl', function($scope, $window, $location, $rootScope, $auth,ngProgressFactory) {
 	$scope.progressbar = ngProgressFactory.createInstance();
     $scope.instagramLogin = function() {
+    	$scope.progressbar.start();
       $auth.authenticate('instagram')
         .then(function(response) {
           $window.localStorage.currentUser = JSON.stringify(response.data.user);
           $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+          $scope.progressbar.complete();
         })
         .catch(function(response) {
           console.log(response.data);
+          $scope.progressbar.complete();
         });
     };
 
