@@ -7,6 +7,8 @@ angular.module('Instagram')
       API.getFeed().success(function(data) {
         $scope.photos = data;
         $scope.progressbar.complete();
+      }).error(function(data, status, headers, config) {
+    	  $scope.progressbar.complete();
       });
     }
 

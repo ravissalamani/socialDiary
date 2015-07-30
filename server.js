@@ -288,6 +288,17 @@ app.get('/api/media/:id', isAuthenticated, function(req, res) {
   });
 });
 
+app.get('/api/tag/:tagname', isAuthenticated, function(req, res) {
+	  var mediaUrl = 'https://api.instagram.com/v1/tags/' + req.params.tagname+'/media/recent';
+	  var params = { access_token: req.user.accessToken };
+	  console.log('tag url ='+mediaUrl+"  params="+params);
+	  request.get({ url: mediaUrl, qs: params, json: true }, function(error, response, body) {
+	    if (!error && response.statusCode == 200) {
+	      res.send(body.data);
+	    }
+	  });
+	});
+
 app.post('/api/like', isAuthenticated, function(req, res) {
   var mediaId = req.body.mediaId;
   var accessToken = { access_token: req.user.accessToken };
