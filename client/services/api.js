@@ -13,7 +13,10 @@ angular.module('Instagram')
         },
         getTag: function(id) {
             return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/tag/' + id);
-          }
+          },
+        getTagCount: function(id) {
+              return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/tagCount/' + id);
+        }
       }
 
     });
