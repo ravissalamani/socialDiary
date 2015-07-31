@@ -10,6 +10,12 @@ angular.module('Instagram')
         },
         likeMedia: function(id) {
           return $http.post('http://socialdiary.eu-gb.mybluemix.net/api/like', { mediaId: id });
+        },
+        getTag: function(id) {
+            return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/tag/' + id);
+          },
+        getTagCount: function(id) {
+              return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/tagCount/' + id);
         }
       }
 
