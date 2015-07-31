@@ -3,19 +3,19 @@ angular.module('Instagram')
 
       return {
         getFeed: function() {
-          return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/feed');
+          return $http.get('http://socialdiary.mybluemix.net/api/feed');
         },
         getMediaById: function(id) {
-          return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/media/' + id);
+          return $http.get('http://socialdiary.mybluemix.net/api/media/' + id);
         },
         likeMedia: function(id) {
-          return $http.post('http://socialdiary.eu-gb.mybluemix.net/api/like', { mediaId: id });
+          return $http.post('http://socialdiary.mybluemix.net/api/like', { mediaId: id });
         },
         getTag: function(id) {
-            return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/tag/' + id);
+            return $http.get('http://socialdiary.mybluemix.net/api/tag/' + id);
           },
         getTagCount: function(id) {
-              return $http.get('http://socialdiary.eu-gb.mybluemix.net/api/tagCount/' + id);
+              return $http.get('http://socialdiary.mybluemix.net/api/tagCount/' + id);
         }
       }
 
