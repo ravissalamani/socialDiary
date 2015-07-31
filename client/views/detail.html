@@ -4,17 +4,20 @@
     <div class="panel-body">
       <div class="row">
 
-        <div class="col-xs-6">
+        <div class="col-xs-12 col-lg-6 col-md-6">
           <img ng-src="{{photo.images.standard_resolution.url}}" class="img-responsive">
         </div>
 
-        <div class="col-xs-6">
+        <div class="col-xs-12 col-lg-6 col-md-6">
           <div class="caption">
-            <h5><a href="http://instagram.com/{{photo.user.username}}">{{photo.user.username}}</a></h5>
+            <h5>{{photo.user.username}}</h5>
             <h6 class="text-muted"><i class="ion-clock"></i> {{photo.created_time * 1000 | date:'short'}}</h6>
-
             <p>{{photo.caption.text}}</p>
-
+		      <span ng-repeat="tag in photo.tags">
+		        <a href="#/tag/{{tag}}">
+		          {{"#"+tag}}
+		        </a>
+		      </span>
           </div>
         </div>
 
@@ -23,8 +26,18 @@
       <div class="row">
 
         <div class="col-xs-12">
-          <h5><i class="ion-heart text-danger"></i> {{photo.likes.count}} likes</h5>
-
+          <h5><i class="ion-heart text-danger"></i> {{photo.likes.count}} likes
+              <span ng-if="photo.likes.count<3 && 0!=photo.likes.count">
+          [
+          		<span ng-repeat="likedUser in photo.likes.data">
+          				{{likedUser.username+" "}}
+          		</span>
+          ]
+          </span>
+          
+          
+          </h5>
+      
           <hr class="soften">
           <h5 class="text-center"><i class="ion-chatbox-working text-primary"></i> Comments</h5>
 
