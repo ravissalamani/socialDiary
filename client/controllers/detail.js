@@ -14,6 +14,7 @@ angular.module('Instagram')
     $scope.like = function() {
       $scope.hasLiked = true;
       API.likeMedia(mediaId).error(function(data) {
+    	  $scope.hasLiked = false;
         sweetAlert('Error', data.message, 'error');
       });
     };
